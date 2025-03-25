@@ -1,14 +1,12 @@
 # 🎶 Melformer  
 🚧 **Heavily Under Construction** – This project is in early development. Expect broken things, half-finished thoughts, and lots of experimentation.
 
----
 ## 📌 Overview
 
 **Melformer** is a research-driven music generation project that combines the representational power of a **VQ-VAE** with the sequential modeling capabilities of a **transformer**.
 
 Instead of working with raw audio directly, Melformer introduces a custom audio format (`.tiaf`) that stores a fixed number of samples per **beat**—not per second. This beat-aligned representation allows the model to treat audio like a sequence of tokens, similar to words in NLP.
 
----
 ## 🎯 Project Goals
 
 - ✅ Develop a beat-aligned audio format (`.tiaf`) for tokenizing music data  
@@ -17,7 +15,6 @@ Instead of working with raw audio directly, Melformer introduces a custom audio 
 - ⏳ Train the model to **generate music autoregressively**  
 - 🚀 Enable controllable, efficient generation of musical sequences  
 
----
 ## 🧠 Ideas & Theory
 
 ### 🎼 The `.tiaf` Format
@@ -47,7 +44,6 @@ In order to save computations while keeping the most relevant features of the or
 3. Insert **transformer** between them  
 4. Train transformer **autoregressively**  
 
----
 ## 📁 Project Structure
 
     melformer/
@@ -96,12 +92,10 @@ In order to save computations while keeping the most relevant features of the or
     ├── environment.yml
     └── README.md
 
----
 ## 🛠️ Setup
 
 Coming soon – once things are working.  
 
----
 ## 📬 Contact
 
 If you're curious, want to collaborate, or just geek out over music + AI, feel free to reach out!
