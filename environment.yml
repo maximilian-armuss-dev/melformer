@@ -1,0 +1,13 @@
+name: melformer
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - pytorch
+  - scipy
+  - numpy
+  - tqdm
+  - einops
+  - matplotlib

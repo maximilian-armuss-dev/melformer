@@ -1,0 +1,10 @@
+{
+  "att_layer_num": 8,
+  "embedding_dim": 128,
+  "num_q_heads": 8,
+  "group_size": 2,
+  "max_seq_len": 256,
+  "dropout": 0.2,
+  "use_cache": false,
+  "mlp_hidden_dim": 1024
+}
