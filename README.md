@@ -7,14 +7,6 @@
 
 Instead of working with raw audio directly, Melformer introduces a custom audio format (`.tiaf`) that stores a fixed number of samples per **beat**—not per second. This beat-aligned representation allows the model to treat audio like a sequence of tokens, similar to words in NLP.
 
-## 🎯 Project Goals
-
-- ✅ Develop a beat-aligned audio format (`.tiaf`) for tokenizing music data  
-- ✅ Build an encoder/decoder architecture based on **VQ-VAE**  
-- ⏳ Integrate a **transformer** between encoder and decoder  
-- ⏳ Train the model to **generate music autoregressively**  
-- 🚀 Enable controllable, efficient generation of musical sequences  
-
 ## 🧠 Ideas & Theory
 
 ### 🎼 The `.tiaf` Format
