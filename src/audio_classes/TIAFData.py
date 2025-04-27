@@ -2,7 +2,8 @@ import numpy as np
 
 
 class TIAFData:
-    SAMPLES_PER_BEAT = 40_000
+    # STFT most efficient of powers of 2, (e.g. window_length = 4096), so
+    SAMPLES_PER_BEAT = 40_960
 
     def __init__(self, samples: np.ndarray, bpm: int, window_length: int, original_peak: float):
         if samples.ndim != 2 or samples.shape[1] != 2:
@@ -14,6 +15,7 @@ class TIAFData:
         self.original_peak = original_peak
 
     def __getitem__(self, idx: int) -> np.ndarray:
+        # TODO: probably wrong dimension access in return when data has batch size
         if idx >= self.num_segments:
             raise IndexError(f"Index {idx} out of range for {self.num_segments} segments.")
         start = idx * self.window_length
@@ -22,3 +24,9 @@ class TIAFData:
 
     def __len__(self) -> int:
         return self.num_segments
+
+    def copy_new_samples(self, new_samples: np.ndarray) -> 'TIAFData':
+        return TIAFData(samples=new_samples,
+                        bpm=self.bpm,
+                        window_length=self.window_length,
+                        original_peak=self.original_peak)
