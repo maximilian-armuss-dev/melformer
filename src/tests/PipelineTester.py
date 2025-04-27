@@ -33,13 +33,14 @@ class PipelineTester:
     def tiaf_to_wav(self, tiaf: TIAF) -> WAV:
         return tiaf.to_wav()
 
-    def test_conversion(self, ref, recon, sample_rate, title, output_path=None, save_as=None):
+    def test_conversion(self, ref, recon, sample_rate, title, output_path=None, save_as=None, plot=False):
         ref_np = ref.data if isinstance(ref, WAV) else ref.to_numpy()
         recon_np = recon.data if isinstance(recon, WAV) else recon.to_numpy()
         mse = measure_MSE(ref_np, recon_np)
         snr = measure_SNR(ref_np, recon_np)
         print(f"{title} - MSE: {mse:.1f}, SNR: {snr:.1f} dB")
-        plot_difference(ref_np, recon_np, sample_rate, title=title)
+        if plot:
+            plot_difference(ref_np, recon_np, sample_rate, title=title)
         if output_path and save_as and isinstance(recon, WAV):
             recon.to_wav_file(output_path / save_as, force_overwrite=True)
         return mse, snr

@@ -2,6 +2,8 @@ import numpy as np
 from pathlib import Path
 from scipy.io import wavfile
 from src.audio.WAVIO import WAVIO
+from src.audio.WAVProcessor import WAVProcessor
+
 
 class WAV:
     def __init__(self, data: np.ndarray, sample_rate: int, bpm: int) -> None:
@@ -13,9 +15,20 @@ class WAV:
     @classmethod
     def from_wav_file(cls, filepath: Path, bpm: int) -> 'WAV':
         sample_rate, data = wavfile.read(filepath)
-        if data.ndim == 1:
-            data = np.stack([data, data], axis=-1)
-        data = data.astype(np.int16)
+        data = WAVProcessor.mono_to_stereo(data)
+        # If confused, read scipy.io.wavfile.read() docstring
+        match data.dtype:
+            case np.float32 | np.float64:
+                data = np.clip(data, -1.0, 1.0)
+                data = (data * np.iinfo(np.int16).max).astype(np.int16)
+            case np.int32:
+                data = (data >> 16).astype(np.int16)
+            case np.uint8:
+                data = ((data.astype(np.int16) - 128) << 8)
+            case np.int16:
+                pass
+            case _:
+                raise ValueError(f"Unsupported WAV data type: {data.dtype}")
         return cls(data, sample_rate, bpm)
 
     @classmethod

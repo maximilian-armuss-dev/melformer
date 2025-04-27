@@ -9,3 +9,6 @@ class OriginalAudioInfo:
     @property
     def effective_num_samples(self) -> int:
         return self.original_num_samples + self.padded_samples
+
+    def copy(self):
+        return OriginalAudioInfo(self.samplerate, self.original_num_samples, self.padded_samples)

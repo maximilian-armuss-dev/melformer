@@ -21,17 +21,15 @@ class TIAF:
         return cls(data, original_info)
 
     def to_wav(self) -> WAV:
+        assert self.data.samples.ndim == 2, f"Expected shape [time, channels], got {self.data.samples.shape}"
         if self.original_info.padded_samples:
             data_wo_padding = self.data.samples[:-self.original_info.padded_samples, :]
         else:
             data_wo_padding = self.data.samples
-
         restored_left = resample(data_wo_padding[:, 0], self.original_info.original_num_samples)
         restored_right = resample(data_wo_padding[:, 1], self.original_info.original_num_samples)
         restored = np.stack([restored_left, restored_right], axis=-1)
-
         scaled = WAVProcessor.scale_to_peak(restored, target_peak=self.data.original_peak)
-
         return WAV(scaled, self.original_info.samplerate, self.data.bpm)
 
     def to_torch(self) -> torch.Tensor:
@@ -44,7 +42,7 @@ class TIAF:
         if isinstance(stft_out_data, torch.Tensor):
             stft_out_data = stft_out_data.detach().cpu().numpy()
         new_data = self.data.copy_new_samples(stft_out_data)
-        return TIAF(data=new_data, original_info=self.original_info)
+        return TIAF(data=new_data, original_info=self.original_info.copy())
 
     def to_tiaf_file(self):
         raise NotImplementedError
