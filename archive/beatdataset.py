@@ -6,8 +6,8 @@ from tqdm.auto import tqdm
 from typing import List
 from pathlib import Path
 from torch.utils.data import Dataset
-from src.audio_classes.tiaf import TimeIndependentAudioFormat
-from src.audio_classes.wav import Wav
+from src.audio.tiaf import TimeIndependentAudioFormat
+from src.audio.wav import Wav
 
 
 class BeatDataset(Dataset):

@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 from scipy.io import wavfile
-from src.audio_classes.WAVIO import WAVIO
+from src.audio.WAVIO import WAVIO
 
 class WAV:
     def __init__(self, data: np.ndarray, sample_rate: int, bpm: int) -> None:

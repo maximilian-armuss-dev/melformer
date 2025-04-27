@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import List, Tuple
 from torch.utils.data import Dataset
 from tqdm import tqdm
-from src.audio_classes.tiaf import TimeIndependentAudioFormat
-from src.audio_classes.wav import Wav
+from src.audio.tiaf import TimeIndependentAudioFormat
+from src.audio.wav import Wav
 
 
 class TrainingExample:

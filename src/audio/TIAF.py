@@ -1,11 +1,11 @@
 import numpy as np
 import torch
 from scipy.signal import resample
-from src.audio_classes.OriginalAudioInfo import OriginalAudioInfo
-from src.audio_classes.TIAFData import TIAFData
-from src.audio_classes.TIAFProcessor import TIAFProcessor
-from src.audio_classes.WAVProcessor import WAVProcessor
-from src.audio_classes.WAV import WAV
+from src.audio.OriginalAudioInfo import OriginalAudioInfo
+from src.audio.TIAFData import TIAFData
+from src.audio.TIAFProcessor import TIAFProcessor
+from src.audio.WAVProcessor import WAVProcessor
+from src.audio.WAV import WAV
 
 class TIAF:
     def __init__(self, data: TIAFData, original_info: OriginalAudioInfo):
@@ -36,6 +36,9 @@ class TIAF:
 
     def to_torch(self) -> torch.Tensor:
         return torch.from_numpy(self.data.samples).float()
+
+    def to_numpy(self) -> np.ndarray:
+        return self.data.samples
 
     def copy_with_stft_data(self, stft_out_data: torch.Tensor) -> 'TIAF':
         if isinstance(stft_out_data, torch.Tensor):

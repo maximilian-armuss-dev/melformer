@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 from typing import List, Tuple
-from src.audio_classes.tiaf import Beat
+from src.audio.tiaf import Beat
 
 
 class Spectrogram:

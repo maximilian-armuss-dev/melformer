@@ -5,8 +5,8 @@ from archive.conv_net import ConvNet
 from pathlib import Path
 
 from archive.deconv_net import DeConvNet
-from src.audio_classes.wav import Wav
-from src.audio_classes.tiaf import TimeIndependentAudioFormat
+from src.audio.wav import Wav
+from src.audio.tiaf import TimeIndependentAudioFormat
 from einops import rearrange
 
 

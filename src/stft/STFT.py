@@ -1,12 +1,11 @@
 import torch
-from torch.onnx.symbolic_opset9 import std_mean
 
-from src.audio_classes.STFTConfig import STFTConfig
-from src.audio_classes.TIAFData import TIAFData
+from src.stft.STFTConfig import STFTConfig
 
 
-class STFT:
+class STFT(torch.nn.Module):
     def __init__(self, stft_config: STFTConfig, inverse: bool = False):
+        super().__init__()
         self.stft_config = stft_config
         self.ft_func = torch.stft if not inverse else torch.istft
         self.inverse = inverse
@@ -41,7 +40,6 @@ class StereoSTFTEncoder(StereoSTFT):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         assert x.ndim == 3 and x.shape[-1] == 2, f"Expected shape [batch, samples, 2], but was {x.shape}"
         return super().forward(x)
-
 
 
 class StereoSTFTDecoder(StereoSTFT):
