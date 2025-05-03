@@ -2,6 +2,10 @@ import torch
 
 from src.stft.STFTConfig import STFTConfig
 
+"""
+TODO: Read papers about EnCodec / Soundstream:
+Multiple STFTs with different window sizes
+"""
 
 class STFT(torch.nn.Module):
     def __init__(self, stft_config: STFTConfig, inverse: bool = False):
