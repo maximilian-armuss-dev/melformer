@@ -1,8 +1,8 @@
 name: melformer
 channels:
+  - pytorch
   - defaults
   - conda-forge
-  - pytorch
 dependencies:
   - python=3.11
   - pytorch
